@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibrahim Doumbia - Développeur Full-Stack</title>
+    <meta name="description" content="Portfolio de Ibrahim Doumbia, développeur full-stack passionné spécialisé en React, Node.js et solutions web modernes">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .skill-badge {
+            transition: all 0.2s ease;
+        }
+        
+        .skill-badge:hover {
+            transform: scale(1.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #667eea;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 16px;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Ibrahim<span class="text-purple-600">.</span></h1>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#accueil" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Accueil</a>
+                    <a href="#apropos" class="nav-link text-gray-700 hover:text-purple-600 font-medium">À propos</a>
+                    <a href="#competences" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Compétences</a>
+                    <a href="#projets" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Projets</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-3">
+                <a href="#accueil" class="block text-gray-700 hover:text-purple-600">Accueil</a>
+                <a href="#apropos" class="block text-gray-700 hover:text-purple-600">À propos</a>
+                <a href="#competences" class="block text-gray-700 hover:text-purple-600">Compétences</a>
+                <a href="#projets" class="block text-gray-700 hover:text-purple-600">Projets</a>
+                <a href="#contact" class="block text-gray-700 hover:text-purple-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="gradient-bg pt-32 pb-20 px-6">
+        <div class="container mx-auto text-center text-white fade-in">
+            <h2 class="text-5xl md:text-6xl font-bold mb-6">Ibrahim Doumbia</h2>
+            <p class="text-xl md:text-2xl mb-4 font-light">Développeur Full-Stack</p>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 opacity-90">
+                Jeune développeur passionné et déterminé, capable d'apprendre rapidement et de livrer des solutions modernes, propres, performantes et adaptées aux besoins réels.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-10">
+                <a href="#projets" class="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                    Voir mes projets
+                </a>
+                <a href="#contact" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition">
+                    Me contacter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- À propos -->
+    <section id="apropos" class="py-20 px-6 bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">À propos de moi</h2>
+            <div class="bg-gray-50 rounded-2xl p-8 shadow-lg">
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Je suis un développeur full-stack passionné par la création de solutions web innovantes et performantes. Mon approche combine créativité technique et pragmatisme pour livrer des applications qui répondent réellement aux besoins des utilisateurs.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Ma force réside dans ma capacité à apprendre rapidement de nouvelles technologies et à m'adapter aux différents contextes de projet. Je maîtrise l'ensemble de la chaîne de développement, du frontend moderne avec React jusqu'aux APIs backend robustes avec Node.js et Express.
+                </p>
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-envelope text-purple-600"></i>
+                        <span class="text-gray-700">ibrahim68doumbia@gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-phone text-purple-600"></i>
+                        <span class="text-gray-700">+225 0748470934</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="competences" class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Compétences techniques</h2>
+            <div class="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-js text-4xl text-yellow-500 mb-2"></i>
+                    <p class="font-semibold text-gray-700">JavaScript</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-js text-4xl text-blue-600 mb-2"></i>
+                    <p class="font-semibold text-gray-700">TypeScript</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-react text-4xl text-cyan-500 mb-2"></i>
+                    <p class="font-semibold text-gray-700">React</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-node text-4xl text-green-600 mb-2"></i>
+                    <p class="font-semibold text-gray-700">Node.js</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fas fa-server text-4xl text-gray-700 mb-2"></i>
+                    <p class="font-semibold text-gray-700">Express</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-html5 text-4xl text-orange-600 mb-2"></i>
+                    <p class="font-semibold text-gray-700">HTML5</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-css3-alt text-4xl text-blue-500 mb-2"></i>
+                    <p class="font-semibold text-gray-700">CSS3</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fas fa-wind text-4xl text-cyan-400 mb-2"></i>
+                    <p class="font-semibold text-gray-700">Tailwind</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-bootstrap text-4xl text-purple-600 mb-2"></i>
+                    <p class="font-semibold text-gray-700">Bootstrap</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fas fa-database text-4xl text-blue-700 mb-2"></i>
+                    <p class="font-semibold text-gray-700">MySQL</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-python text-4xl text-blue-500 mb-2"></i>
+                    <p class="font-semibold text-gray-700">Python</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fas fa-bolt text-4xl text-green-500 mb-2"></i>
+                    <p class="font-semibold text-gray-700">FastAPI</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-git-alt text-4xl text-orange-500 mb-2"></i>
+                    <p class="font-semibold text-gray-700">Git</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fab fa-github text-4xl text-gray-800 mb-2"></i>
+                    <p class="font-semibold text-gray-700">GitHub</p>
+                </div>
+                <div class="skill-badge bg-white p-4 rounded-xl shadow-md text-center">
+                    <i class="fas fa-brain text-4xl text-purple-600 mb-2"></i>
+                    <p class="font-semibold text-gray-700">IA/ML</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projets" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Mes Projets</h2>
+            <p class="text-center text-gray-600 mb-12">Découvrez mes réalisations professionnelles et personnelles</p>
+            
+            <!-- Projets Principaux -->
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Projets Professionnels</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" id="main-projects"></div>
+            
+            <!-- Projets Personnels -->
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Projets Personnels</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="personal-projects"></div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Contactez-moi</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Informations</h3>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-purple-600 p-3 rounded-full">
+                            <i class="fas fa-envelope text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Email</p>
+                            <a href="mailto:ibrahim68doumbia@gmail.com" class="text-gray-800 font-semibold hover:text-purple-600">ibrahim68doumbia@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-purple-600 p-3 rounded-full">
+                            <i class="fas fa-phone text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Téléphone</p>
+                            <a href="tel:+2250748470934" class="text-gray-800 font-semibold hover:text-purple-600">+225 0748470934</a>
+                        </div>
+                    </div>
+                    <div class="pt-6">
+                        <a href="./cv/CV - Doumbia_Ibrahim.pdf" download="CV_Ibrahim_Doumbia.pdf" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                            <i class="fas fa-download mr-2"></i>Télécharger mon CV
+                        </a>
+                    </div>
+                </div>
+                
+                <form id="contact-form" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Nom</label>
+                        <input type="text" id="nom" name="nom" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-600" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Sujet</label>
+                        <input type="text" id="sujet" name="sujet" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-600" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Message</label>
+                        <textarea rows="4" id="message" name="message" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-600" required></textarea>
+                    </div>
+                    <div id="form-message" class="hidden p-3 rounded-lg text-center font-semibold"></div>
+                    <button type="submit" id="submit-btn" class="w-full bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                        Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-6">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">© 2025 Ibrahim Doumbia - Tous droits réservés</p>
+            <p class="text-gray-500 mt-2">Développeur Full-Stack passionné</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // Données des projets
+        const projects = {
+            main: [
+                {
+                    id: 1,
+                    title: "GreenWay",
+                    subtitle: "Plateforme Agricole Intelligente",
+                    shortDesc: "Une application agricole intelligente qui guide les agriculteurs de l'ensemencement jusqu'à la récolte, tout en intégrant un système d'IA pour détecter les maladies des plantes.",
+                    longDesc: "GreenWay est une plateforme digitale destinée aux agriculteurs débutants comme expérimentés. Elle propose un itinéraire technique complet pour chaque culture : préparation du sol, ensemencement, irrigation, entretien, traitements, puis récolte. L'application intègre également un système d'intelligence artificielle capable d'analyser une image de feuille ou de plante afin de détecter précocement les maladies, permettant d'agir rapidement pour éviter les pertes de rendement. Une interface intuitive, des recommandations contextuelles (climat, zone, type de sol) et une expérience simplifiée permettent un accès facile même aux utilisateurs sans connaissances techniques.",
+                    stack: ["Flutter", "FastAPI", "Laravel", "IA Gemini"],
+                    icon: "fa-leaf",
+                    color: "green"
+                },
+                {
+                    id: 2,
+                    title: "Norma+",
+                    subtitle: "Site Entreprise Informatique",
+                    shortDesc: "Site complet pour une entreprise spécialisée dans la vente d'équipements informatiques, accompagné d'un tableau de bord administrateur.",
+                    longDesc: "Norma+ est un site vitrine moderne destiné à présenter une entreprise de vente d'équipements informatiques. Il comprend une page d'accueil professionnelle inspirée des interfaces Wave, une section Services détaillant les solutions technologiques proposées, une section Solutions expliquant les offres phares, un formulaire de contact (nom, numéro, demande client) et un tableau de bord Admin permettant de consulter les messages envoyés par les visiteurs du site en temps réel. Design bleu premium (couleur du logo), expérience utilisateur claire, responsive et cohérente.",
+                    stack: ["React JS", "Tailwind CSS", "Node.js"],
+                    icon: "fa-building",
+                    color: "blue"
+                },
+                {
+                    id: 3,
+                    title: "Site E-commerce",
+                    subtitle: "Boutique en ligne complète",
+                    shortDesc: "Un site e-commerce moderne permettant la gestion complète d'un catalogue de produits.",
+                    longDesc: "Création d'un site de commerce en ligne avec page d'accueil optimisée, liste des produits, panier dynamique, page produit détaillée, filtre par catégories, simulation système de paiement et gestion du stock côté admin (back-office simple). L'interface est responsive, rapide et pensée pour offrir une expérience fluide aux utilisateurs mobiles.",
+                    stack: ["React", "Node.js"],
+                    icon: "fa-shopping-cart",
+                    color: "purple"
+                }
+            ],
+            personal: [
+                {
+                    id: 4,
+                    title: "Analyse CV avec IA",
+                    subtitle: "Intelligence Artificielle",
+                    shortDesc: "Un site permettant d'uploader un CV et de l'analyser automatiquement grâce à l'IA.",
+                    longDesc: "Application Web permettant d'envoyer un CV (PDF) afin d'en extraire les informations clés : compétences, expériences, niveau d'étude, synthèse automatique. Utilise l'API IA d'Affinda avec gestion des erreurs, interface d'upload, et affichage structuré du résultat.",
+                    stack: ["Node.js", "Express", "Affinda API", "React JS"],
+                    icon: "fa-file-alt",
+                    color: "indigo"
+                },
+                {
+                    id: 5,
+                    title: "Gestion de Stock",
+                    subtitle: "Application Web",
+                    shortDesc: "Application Web permettant de gérer les produits d'un stock avec CRUD complet.",
+                    longDesc: "Gestion des produits via une interface simple : ajouter un produit, modifier, supprimer, suivre les quantités, alertes en cas de rupture. Stock enregistré en JSON/DB selon la version.",
+                    stack: ["JavaScript", "Node.js", "Bootstrap"],
+                    icon: "fa-boxes",
+                    color: "orange"
+                },
+                {
+                    id: 6,
+                    title: "To-Do List",
+                    subtitle: "CRUD LocalStorage",
+                    shortDesc: "Application de gestion de tâches simple et éducative.",
+                    longDesc: "To-do list avec fonctionnalités : ajouter, éditer, supprimer des tâches, persistance des tâches via localStorage, interface simple et responsive.",
+                    stack: ["HTML", "CSS", "JavaScript"],
+                    icon: "fa-tasks",
+                    color: "pink"
+                }
+            ]
+        };
+
+        // Fonction pour créer une carte de projet
+        function createProjectCard(project) {
+            const colorClasses = {
+                green: 'bg-green-500',
+                blue: 'bg-blue-500',
+                purple: 'bg-purple-500',
+                indigo: 'bg-indigo-500',
+                orange: 'bg-orange-500',
+                pink: 'bg-pink-500'
+            };
+            
+            return `
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover cursor-pointer" onclick="openModal(${project.id})">
+                    <div class="${colorClasses[project.color]} p-6 text-white">
+                        <i class="fas ${project.icon} text-5xl mb-4"></i>
+                        <h3 class="text-2xl font-bold">${project.title}</h3>
+                        <p class="text-sm opacity-90">${project.subtitle}</p>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4">${project.shortDesc}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${project.stack.map(tech => `<span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">${tech}</span>`).join('')}
+                        </div>
+                        <button class="text-purple-600 font-semibold hover:text-purple-800 transition">
+                            Voir les détails <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Charger les projets
+        document.getElementById('main-projects').innerHTML = projects.main.map(createProjectCard).join('');
+        document.getElementById('personal-projects').innerHTML = projects.personal.map(createProjectCard).join('');
+
+        // Modal
+        const modal = document.getElementById('projectModal');
+        const span = document.getElementsByClassName('close')[0];
+
+        function openModal(projectId) {
+            const allProjects = [...projects.main, ...projects.personal];
+            const project = allProjects.find(p => p.id === projectId);
+            
+            const colorClasses = {
+                green: 'bg-green-500',
+                blue: 'bg-blue-500',
+                purple: 'bg-purple-500',
+                indigo: 'bg-indigo-500',
+                orange: 'bg-orange-500',
+                pink: 'bg-pink-500'
+            };
+            
+            document.getElementById('modal-body').innerHTML = `
+                <div class="${colorClasses[project.color]} text-white p-8">
+                    <i class="fas ${project.icon} text-6xl mb-4"></i>
+                    <h2 class="text-4xl font-bold mb-2">${project.title}</h2>
+                    <p class="text-xl opacity-90">${project.subtitle}</p>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Description détaillée</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6">${project.longDesc}</p>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Technologies utilisées</h3>
+                    <div class="flex flex-wrap gap-3">
+                        ${project.stack.map(tech => `<span class="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg font-semibold">${tech}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Menu mobile
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Form submission avec intégration backend
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+        const submitBtn = document.getElementById('submit-btn');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Désactiver le bouton pendant l'envoi
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+            
+            // Récupérer les données du formulaire
+            const formData = {
+                nom: document.getElementById('nom').value,
+                sujet: document.getElementById('sujet').value,
+                message: document.getElementById('message').value
+            };
+            
+            try {
+                // Envoyer les données au backend
+                const response = await fetch('http://localhost:3000/api/portfolio', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Afficher message de succès
+                    formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+                    formMessage.classList.add('bg-green-100', 'text-green-700');
+                    formMessage.textContent = 'Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.';
+                    
+                    // Réinitialiser le formulaire
+                    contactForm.reset();
+                } else {
+                    // Afficher message d'erreur
+                    formMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+                    formMessage.classList.add('bg-red-100', 'text-red-700');
+                    formMessage.textContent = result.error || 'Une erreur est survenue lors de l\'envoi du message.';
+                }
+                
+            } catch (error) {
+                console.error('Erreur lors de l\'envoi:', error);
+                formMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+                formMessage.classList.add('bg-red-100', 'text-red-700');
+                formMessage.textContent = 'Impossible de contacter le serveur. Veuillez réessayer plus tard.';
+            } finally {
+                // Réactiver le bouton
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Envoyer le message';
+                
+                // Masquer le message après 5 secondes
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
